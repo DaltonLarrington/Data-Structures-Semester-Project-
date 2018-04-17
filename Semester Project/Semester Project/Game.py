@@ -148,7 +148,7 @@ while running:
     # check to see if a mob hit the player
     hits = pygame.sprite.spritecollide(player, mobs, False)
     if hits:
-        running = True
+        running = False
         pygame.display.set_caption('Game Over')     
         
     #Draw

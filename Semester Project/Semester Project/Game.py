@@ -149,7 +149,7 @@ while running:
     hits = pygame.sprite.spritecollide(player, mobs, False)
     if hits:
         running = False
-        pygame.display.set_caption('Game Over')     
+        print("Game Over")   
         
     #Draw
     screen.fill(WHITE)   

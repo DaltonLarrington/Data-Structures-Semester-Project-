@@ -4,7 +4,6 @@ from os import path
 
 pygame.init()
 
-
 WIDTH = 1280
 HEIGHT = 760
 FPS = 60
@@ -18,13 +17,13 @@ YELLOW = (255, 255, 0)
 
 #Game Over
 gameDisplay = pygame.display.set_mode((WIDTH, HEIGHT))
-GOImg = pygame.image.load('GameOver.png')
+##GOImg = pygame.image.load('GameOver.png')
 
 #Player Sprite
-img = pygame.image.load('spaceship.png')
+img = pygame.image.load("spaceship.png")
 
 #Mob Sprite
-img1 = pygame.image.load('asteroid.png')
+img1 = pygame.image.load("asteroid.png")
 
 #initialize pygame and create window
 pygame.mixer.init()
@@ -41,8 +40,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = img
-        self.rect = self.image.get_rect()
-        
+        self.rect = self.image.get_rect()        
 ##        pygame.sprite.Sprite.__init__(self)
 ##        self.image = pygame.Surface((20, 50))
 ##        self.image.fill(BLUE)
@@ -78,8 +76,7 @@ class Mob(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = img1
-        self.rect = self.image.get_rect()
-        
+        self.rect = self.image.get_rect()        
 ##        pygame.sprite.Sprite.__init__(self)
 ##        self.image = pygame.Surface((30, 40))
 ##        self.image.fill(RED)
@@ -152,11 +149,8 @@ while running:
     hits = pygame.sprite.spritecollide(player, mobs, False)
     if hits:
         running = True
-        pygame.display.set_caption('Game Over')
-        GOImg()
+        pygame.display.set_caption('Game Over')     
         
-
-
     #Draw
     screen.fill(WHITE)   
     screen.blit(background,[0,0])

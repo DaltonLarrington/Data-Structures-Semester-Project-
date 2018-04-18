@@ -25,6 +25,9 @@ img = pygame.image.load("spaceship.png")
 #Mob Sprite
 img1 = pygame.image.load("asteroid.png")
 
+#Bullet Sprite
+img2 = pygame.image.load("laser.png")
+
 #initialize pygame and create window
 pygame.mixer.init()
 background = pygame.image.load('background.png')
@@ -45,6 +48,8 @@ class Player(pygame.sprite.Sprite):
 ##        self.image = pygame.Surface((20, 50))
 ##        self.image.fill(BLUE)
 ##        self.rect = self.image.get_rect()
+        self.radius = 50
+##        pygame.draw.circle(self.image, RED, self.rect.center, self.radius)
         self.rect.centerx = WIDTH / 2
         self.rect.bottom = HEIGHT - 300
         self.speedx = 0      
@@ -67,7 +72,7 @@ class Player(pygame.sprite.Sprite):
             
     
     def shoot(self):       
-        bullet = Bullet(self.rect.centerx, self.rect.top)      
+        bullet = Bullet(self.rect.centerx, self.rect.top)         
         all_sprites.add(bullet)
         bullets.add(bullet)
 
@@ -83,6 +88,8 @@ class Mob(pygame.sprite.Sprite):
 ##        self.rect = self.image.get_rect()
 ##        self.rect.x = random.randrange(WIDTH - self.rect.width)
 ##        self.rect.y = random.randrange(-100, -40)
+        self.radius = int(self.rect.width)
+##        pygame.draw.circle(self.image, RED, self.rect.center, self.radius)
         self.speedy = random.randrange(1, 8)
         self.speedx = random.randrange(-3, 3)
 
@@ -99,8 +106,8 @@ class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface((10, 20))
-        self.image.fill(YELLOW)
-        self.rect = self.image.get_rect()
+        self.image = img2
+        self.rect = self.image.get_rect()        
         self.rect.bottom = y
         self.rect.centerx = x
         self.speedy = -10
@@ -146,7 +153,7 @@ while running:
         mobs.add(m)
 
     # check to see if a mob hit the player
-    hits = pygame.sprite.spritecollide(player, mobs, False)
+    hits = pygame.sprite.spritecollide(player, mobs, False, pygame.sprite.collide_circle)
     if hits:
         running = False
         print("Game Over")   
